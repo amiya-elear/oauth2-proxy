@@ -23,7 +23,7 @@ import (
 	"github.com/oauth2-proxy/oauth2-proxy/pkg/cookies"
 	"github.com/oauth2-proxy/oauth2-proxy/pkg/encryption"
 	"github.com/oauth2-proxy/oauth2-proxy/pkg/logger"
-	"github.com/oauth2-proxy/oauth2-proxy/providers"
+	"github.com/amiya-elear/oauth2-proxy/providers"
 	"github.com/yhat/wsutil"
 )
 
