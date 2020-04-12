@@ -522,6 +522,7 @@ func (p *OAuthProxy) GetRedirect(req *http.Request) (redirect string, err error)
 		redirect = req.Form.Get("rd")
                 logger.Printf("############################## redirect = %s", redirect);
 	}
+        /*
 	if !p.IsValidRedirect(redirect) {
                 logger.Printf("############################## invalid redirect");
 		redirect = req.URL.Path
@@ -529,6 +530,7 @@ func (p *OAuthProxy) GetRedirect(req *http.Request) (redirect string, err error)
 			redirect = "/"
 		}
 	}
+       */
 
 	return
 }
