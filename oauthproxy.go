@@ -520,8 +520,10 @@ func (p *OAuthProxy) GetRedirect(req *http.Request) (redirect string, err error)
 	redirect = req.Header.Get("X-Auth-Request-Redirect")
 	if req.Form.Get("rd") != "" {
 		redirect = req.Form.Get("rd")
+                logger.printf("############################## redirect = %q", redirect);
 	}
 	if !p.IsValidRedirect(redirect) {
+                logger.printf("############################## invalid redirect");
 		redirect = req.URL.Path
 		if strings.HasPrefix(redirect, p.ProxyPrefix) {
 			redirect = "/"
