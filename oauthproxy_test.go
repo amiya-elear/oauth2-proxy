@@ -21,7 +21,7 @@ import (
 	"github.com/oauth2-proxy/oauth2-proxy/pkg/apis/sessions"
 	"github.com/oauth2-proxy/oauth2-proxy/pkg/logger"
 	"github.com/oauth2-proxy/oauth2-proxy/pkg/sessions/cookie"
-	"github.com/oauth2-proxy/oauth2-proxy/providers"
+	"github.com/amiya-elear/oauth2-proxy/providers"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/net/websocket"
