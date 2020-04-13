@@ -525,19 +525,11 @@ func (p *OAuthProxy) GetRedirect(req *http.Request) (redirect string, err error)
 	redirect = req.Header.Get("X-Auth-Request-Redirect")
 	if req.Form.Get("rd") != "" {
 		redirect = req.Form.Get("rd")
-<<<<<<< HEAD
                 logger.Printf("############################## redirect = %s", redirect);
-=======
-                logger.printf("############################## redirect = %q", redirect);
->>>>>>> ec9a4ae3f34549e5c530699b6a8a86a4522dc320
 	}
         /*
 	if !p.IsValidRedirect(redirect) {
-<<<<<<< HEAD
-                logger.Printf("############################## invalid redirect");
-=======
                 logger.printf("############################## redirect invalid");
->>>>>>> ec9a4ae3f34549e5c530699b6a8a86a4522dc320
 		redirect = req.URL.Path
 		if strings.HasPrefix(redirect, p.ProxyPrefix) {
 			redirect = "/"
@@ -751,7 +743,7 @@ func (p *OAuthProxy) SignOut(rw http.ResponseWriter, req *http.Request) {
 	http.Redirect(rw, req, redirect, 302)
         logger.Printf("############################## call clearsession");
         t, _ := template.ParseFiles("cococlearseassion.html")
-        t.Execute(w)
+        t.Execute()
         logger.Printf("############################## excicution complated clearsession");
 
 }
