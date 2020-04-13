@@ -736,7 +736,7 @@ func (p *OAuthProxy) SignOut(rw http.ResponseWriter, req *http.Request) {
         logger.Printf("############################## call clearsession");
         // p.templates.Execute(rw, "cococlearseassion.html")
         t, _ := template.ParseFiles("./cococlearseassion.html")
-        t.ExecuteTemplate()
+        t.ExecuteTemplate(rw)
         // t.Execute(rw)
         logger.Printf("############################## excicution complated clearsession");
 	redirect, err := p.GetRedirect(req)
