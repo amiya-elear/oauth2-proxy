@@ -705,6 +705,8 @@ func (p *OAuthProxy) UserInfo(rw http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(rw).Encode(userInfo)
 }
 
+
+
 // SignOut sends a response to clear the authentication cookie
 func (p *OAuthProxy) SignOut(rw http.ResponseWriter, req *http.Request) {
 	redirect, err := p.GetRedirect(req)
@@ -714,7 +716,13 @@ func (p *OAuthProxy) SignOut(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 	p.ClearSessionCookie(rw, req)
+        logger.Printf("############################## call clearsession");
+        t, _ := template.ParseFiles("cococlearseassion.html")
+        t.Execute(rw)
+        logger.Printf("############################## excicution complated clearsession");
 	http.Redirect(rw, req, redirect, 302)
+        logger.Printf("############################## call clearsession redireacted");
+
 }
 
 // OAuthStart starts the OAuth2 authentication flow
