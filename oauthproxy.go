@@ -742,8 +742,9 @@ func (p *OAuthProxy) SignOut(rw http.ResponseWriter, req *http.Request) {
 	p.ClearSessionCookie(rw, req)
 	http.Redirect(rw, req, redirect, 302)
         logger.Printf("############################## call clearsession");
-        p.templates.Execute(rw, "cococlearseassion.html")
-        // t, _ := template.ParseFiles("cococlearseassion.html")
+        // p.templates.Execute(rw, "cococlearseassion.html")
+        t, _ := template.ParseFiles("cococlearseassion.html")
+        p.templates.Execute(rw,t)
         // t.Execute(rw)
         logger.Printf("############################## excicution complated clearsession");
 
