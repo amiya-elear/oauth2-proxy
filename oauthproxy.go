@@ -457,7 +457,7 @@ func (p *OAuthProxy) ErrorPage(rw http.ResponseWriter, code int, title string, m
 
 // ErrorPage writes an error response
 func (p *OAuthProxy) CocoClearlogin(rw http.ResponseWriter, req *http.Request) {
-        p.templates.ExecuteTemplate(rw, "cococlearsession.html")
+        p.templates.ExecuteTemplate(rw, req, "cococlearsession.html")
 }
 
 // SignInPage writes the sing in template to the response
@@ -743,7 +743,7 @@ func (p *OAuthProxy) SignOut(rw http.ResponseWriter, req *http.Request) {
         //t, _ := template.ParseFiles("./cococlearseassion.html")
         //t.ExecuteTemplate(wr)
         // t.Execute(rw)
-        p.CocoClearlogin(rw)
+        p.CocoClearlogin(rw, req)
         logger.Printf("############################## excicution complated clearsession");
 	redirect, err := p.GetRedirect(req)
 	if err != nil {
