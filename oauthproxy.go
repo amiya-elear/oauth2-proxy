@@ -456,12 +456,12 @@ func (p *OAuthProxy) ErrorPage(rw http.ResponseWriter, code int, title string, m
 }
 
 // ErrorPage writes an error response
-func (p *OAuthProxy) CocoClearlogin(rw http.ResponseWriter) {
+func (p *OAuthProxy) CocoClearlogin(rw http.ResponseWriter, title string) {
         rw.WriteHeader(http.StatusOK)
         t := struct {
                 Title       string
         }{
-                Title:       fmt.Sprintf("%d", title)
+                Title:       fmt.Sprintf("%d", title),
         }
         p.templates.ExecuteTemplate(rw, "cococlearsession.html", t)
 }
