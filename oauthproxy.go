@@ -456,8 +456,8 @@ func (p *OAuthProxy) ErrorPage(rw http.ResponseWriter, code int, title string, m
 }
 
 // ErrorPage writes an error response
-func (p *OAuthProxy) CocoClearlogin(rw http.ResponseWriter, req *http.Request) {
-        p.templates.ExecuteTemplate(rw, req, "cococlearsession.html")
+func (p *OAuthProxy) CocoClearlogin(rw http.ResponseWriter) {
+        p.templates.ExecuteTemplate(rw, "cococlearsession.html")
 }
 
 // SignInPage writes the sing in template to the response
