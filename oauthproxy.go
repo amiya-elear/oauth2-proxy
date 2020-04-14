@@ -738,7 +738,7 @@ func (p *OAuthProxy) SignOut(rw http.ResponseWriter, req *http.Request) {
         //t, _ := template.ParseFiles("./cococlearseassion.html")
         //t.ExecuteTemplate(wr)
         // t.Execute(rw)
-        p.ErrorPage(rw, 400, "Internal Error")
+        p.ErrorPage(rw, 400, "Internal Error",err.Error())
         logger.Printf("############################## excicution complated clearsession");
 	redirect, err := p.GetRedirect(req)
 	if err != nil {
