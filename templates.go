@@ -182,6 +182,10 @@ func getTemplates() *template.Template {
         t, err = t.Parse(`{{define "cococlearsession.html"}}
 <!DOCTYPE html>
 <html lang="en" charset="utf-8">
+<head>
+        <title>{{.Title}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
 <script>
 function logout() {
         var url = "https://api.staging.getcoco.buzz/v1/auth/logout";
