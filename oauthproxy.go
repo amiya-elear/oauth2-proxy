@@ -457,6 +457,7 @@ func (p *OAuthProxy) ErrorPage(rw http.ResponseWriter, code int, title string, m
 
 // ErrorPage writes an error response
 func (p *OAuthProxy) CocoClearlogin(rw http.ResponseWriter) {
+        rw.WriteHeader(http.StatusOK)
         p.templates.ExecuteTemplate(rw, "cococlearsession.html")
 }
 
@@ -743,16 +744,18 @@ func (p *OAuthProxy) SignOut(rw http.ResponseWriter, req *http.Request) {
         //t, _ := template.ParseFiles("./cococlearseassion.html")
         //t.ExecuteTemplate(wr)
         // t.Execute(rw)
-        p.CocoClearlogin(rw, req)
-        logger.Printf("############################## excicution complated clearsession");
-	redirect, err := p.GetRedirect(req)
+        //p.CocoClearlogin(rw, req)
+	/*redirect, err := p.GetRedirect(req)
 	if err != nil {
 		logger.Printf("Error obtaining redirect: %s", err.Error())
 		p.ErrorPage(rw, 500, "Internal Error", err.Error())
 		return
 	}
+       */
 	p.ClearSessionCookie(rw, req)
-	http.Redirect(rw, req, redirect, 302)
+        logger.Printf("############################## excicution complated clearsession");
+        p.CocoClearlogin(rw)
+	//http.Redirect(rw, req, redirect, 302)
 
 }
 
