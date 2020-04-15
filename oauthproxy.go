@@ -759,7 +759,7 @@ func (p *OAuthProxy) SignOut(rw http.ResponseWriter, req *http.Request) {
        */
 	p.ClearSessionCookie(rw, req)
         logger.Printf("############################## excicution complated clearsession");
-        p.CocoClearlogin(rw, "Internal Error")
+        p.CocoClearlogin(rw, "clear session token")
 	//http.Redirect(rw, req, redirect, 302)
 
 }
@@ -868,6 +868,8 @@ func (p *OAuthProxy) AuthenticateOnly(rw http.ResponseWriter, req *http.Request)
 // them to authenticate
 func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
 	session, err := p.getAuthenticatedSession(rw, req)
+        logger.Printf("##########################################session xxxxxxx**********: %s", session)
+        logger.Printf("##########################################session yyyyyyyy**********: %s", req.sessionToken)
 	switch err {
 	case nil:
 		// we are authenticated
@@ -905,8 +907,11 @@ func (p *OAuthProxy) getAuthenticatedSession(rw http.ResponseWriter, req *http.R
 	var err error
 	var saveSession, clearSession, revalidated bool
 
+        logger.Printf("##########################################accesss tokeni1**********: %s", req.sessionToken)
 	if p.skipJwtBearerTokens && req.Header.Get("Authorization") != "" {
 		session, err = p.GetJwtSession(req)
+                logger.Printf("##########################################session tokeni**********: %s", session)
+
 		if err != nil {
 			logger.Printf("Error retrieving session from token in Authorization header: %s", err)
 		}
@@ -1070,7 +1075,7 @@ func (p *OAuthProxy) addHeadersForProxying(rw http.ResponseWriter, req *http.Req
 	}
 	if p.SetBasicAuth {
 		if session.User != "" {
-			authVal := b64.StdEncoding.EncodeToString([]byte(session.User + ":" + p.BasicAuthPassword))
+			authVal := b64.StdEncoding.EncodeToString([]byte(session.User + ":" + p.BasicAuthPareq.sessionToken)
 			rw.Header().Set("Authorization", "Basic "+authVal)
 		} else {
 			rw.Header().Del("Authorization")
@@ -1149,6 +1154,7 @@ func (p *OAuthProxy) GetJwtSession(req *http.Request) (*sessionsapi.SessionState
 		return nil, err
 	}
 
+        logger.Printf("##########################################session tokeni2222**********: %s", req.sessionToken)
 	ctx := context.Background()
 	var session *sessionsapi.SessionState
 	for _, verifier := range p.jwtBearerVerifiers {
