@@ -757,14 +757,10 @@ func (p *OAuthProxy) SignOut(rw http.ResponseWriter, req *http.Request) {
 	}
        */
 	p.ClearSessionCookie(rw, req)
-<<<<<<< HEAD
         logger.Printf("############################## excicution complated clearsession");
         p.CocoClearlogin(rw, "clear session token")
-	//http.Redirect(rw, req, redirect, 302)
 
-=======
-	http.Redirect(rw, req, redirect, http.StatusFound)
->>>>>>> dd05e7ff0bad417b088c9e67e5eaa624e30e3ddc
+	//http.Redirect(rw, req, redirect, http.StatusFound)
 }
 
 // OAuthStart starts the OAuth2 authentication flow
@@ -1078,7 +1074,7 @@ func (p *OAuthProxy) addHeadersForProxying(rw http.ResponseWriter, req *http.Req
 	}
 	if p.SetBasicAuth {
 		if session.User != "" {
-			authVal := b64.StdEncoding.EncodeToString([]byte(session.User + ":" + p.BasicAuthPareq.sessionToken)
+			authVal := b64.StdEncoding.EncodeToString([]byte(session.User + ":" + p.BasicAuthPassword))
 			rw.Header().Set("Authorization", "Basic "+authVal)
 		} else {
 			rw.Header().Del("Authorization")
