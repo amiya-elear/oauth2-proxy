@@ -873,11 +873,12 @@ func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
 	case nil:
 		// we are authenticated
                 cookie, err := req.Cookie("sessionToken")
-                fmt.Println("############ %s",cookie)
+                fmt.Println("cookie############ %s",cookie.Value)
                 if err != nil {
-                  p.SignOut(rw, req);
-                  return
+                 fmt.Println("####cant find cookie")
+                   p.SignOut(rw, req);
                 }
+                fmt.Printf("#####cookie found%s=%s\r\n", cookie.Name, cookie.Value)
 		p.addHeadersForProxying(rw, req, session)
 		p.serveMux.ServeHTTP(rw, req)
 
