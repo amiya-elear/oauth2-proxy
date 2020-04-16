@@ -868,10 +868,15 @@ func (p *OAuthProxy) AuthenticateOnly(rw http.ResponseWriter, req *http.Request)
 func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
 	session, err := p.getAuthenticatedSession(rw, req)
         logger.Printf("##########################################session xxxxxxx**********: %s", session)
-        logger.Printf("##########################################session yyyyyyyy**********: %s", req.sessionToken)
+        logger.Printf("##########################################session yyyyyyyy**********")
 	switch err {
 	case nil:
 		// we are authenticated
+                cookie, err := req.Cookie("sessionToken")
+                if err != nil {
+                  p.SignOut(rw, req);
+                  return
+                }
 		p.addHeadersForProxying(rw, req, session)
 		p.serveMux.ServeHTTP(rw, req)
 
@@ -906,7 +911,7 @@ func (p *OAuthProxy) getAuthenticatedSession(rw http.ResponseWriter, req *http.R
 	var err error
 	var saveSession, clearSession, revalidated bool
 
-        logger.Printf("##########################################accesss tokeni1**********: %s", req.sessionToken)
+        logger.Printf("##########################################accesss tokeni1**********: %s", req.Cookie("sessionToken"))
 	if p.skipJwtBearerTokens && req.Header.Get("Authorization") != "" {
 		session, err = p.GetJwtSession(req)
                 logger.Printf("##########################################session tokeni**********: %s", session)
@@ -1166,7 +1171,7 @@ func (p *OAuthProxy) GetJwtSession(req *http.Request) (*sessionsapi.SessionState
 		return nil, err
 	}
 
-        logger.Printf("##########################################session tokeni2222**********: %s", req.sessionToken)
+        logger.Printf("##########################################session tokeni2222**********:")
 	ctx := context.Background()
 	var session *sessionsapi.SessionState
 	for _, verifier := range p.jwtBearerVerifiers {
