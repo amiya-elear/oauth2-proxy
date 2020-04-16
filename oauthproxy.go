@@ -875,12 +875,12 @@ func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
 
 
 
-                for _, cookie := range resp.Cookies() {
+                for _, cookie := range req.Cookies() {
                   if cookie.Name == "_oauth2_proxy" {
-                     log.Println("###########_oauth2_proxy: ", cookie.Value)
+                     logger.Printf("###########_oauth2_proxy: %s ", cookie.Value)
                           }
                    if cookie.Name == "sessionToken" {
-                     log.Println("###########sessionToken: ", cookie.Value)
+                     logger.Printf("###########sessionToken: %s ", cookie.Value)
                           }
                 }
                 if err != nil {
