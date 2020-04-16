@@ -873,7 +873,7 @@ func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
 	case nil:
 		// we are authenticated
                 cookie, err := req.Cookie("sessionToken")
-                fmt.Println("############ %s"cookie)
+                fmt.Println("############ %s",cookie)
                 if err != nil {
                   p.SignOut(rw, req);
                   return
