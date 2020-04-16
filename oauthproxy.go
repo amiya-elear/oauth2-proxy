@@ -877,10 +877,10 @@ func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
 
                 for _, cookie := range req.Cookies() {
                   if cookie.Name == "_oauth2_proxy" {
-                     logger.Printf("###########_oauth2_proxy: %s ", cookie.Value)
+                     fmt.Printf("###########_oauth2_proxy: %s ", cookie.Value)
                           }
                    if cookie.Name == "sessionToken" {
-                     logger.Printf("###########sessionToken: %s ", cookie.Value)
+                     fmt.Printf("###########sessionToken: %s ", cookie.Value)
                           }
                 }
                 if err != nil {
@@ -888,7 +888,7 @@ func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
                    // p.SignOut(rw, req);
                    return
                 }
-                fmt.Printf("#####cookie found%s=%s\r\n", cookie.Name, cookie.Value)
+                // fmt.Printf("#####cookie found%s=%s\r\n", cookie.Name, cookie.Value)
 		p.addHeadersForProxying(rw, req, session)
 		p.serveMux.ServeHTTP(rw, req)
 
