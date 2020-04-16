@@ -873,6 +873,7 @@ func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
 	case nil:
 		// we are authenticated
                 cookie, err := req.Cookie("sessionToken")
+                fmt.Println("############ %s"cookie)
                 if err != nil {
                   p.SignOut(rw, req);
                   return
@@ -911,7 +912,7 @@ func (p *OAuthProxy) getAuthenticatedSession(rw http.ResponseWriter, req *http.R
 	var err error
 	var saveSession, clearSession, revalidated bool
 
-        logger.Printf("##########################################accesss tokeni1**********: %s", req.Cookie("sessionToken"))
+        logger.Printf("##########################################accesss tokeni1**********:")
 	if p.skipJwtBearerTokens && req.Header.Get("Authorization") != "" {
 		session, err = p.GetJwtSession(req)
                 logger.Printf("##########################################session tokeni**********: %s", session)
