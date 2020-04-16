@@ -883,6 +883,8 @@ func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
                      fmt.Printf("###########sessionToken: %s ", cookie.Value)
                           }
                 }
+                cookie, err := req.Cookie("sessionToken")
+                fmt.Printf("#####cookie found%s=%s\r\n", cookie.Name, cookie.Value)
                 if err != nil {
                  fmt.Println("####cant find cookie")
                    // p.SignOut(rw, req);
