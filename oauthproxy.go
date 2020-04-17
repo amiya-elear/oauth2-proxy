@@ -872,9 +872,6 @@ func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
 	switch err {
 	case nil:
 		// we are authenticated
-
-               /*
-
                 for _, cookie := range req.Cookies() {
                   if cookie.Name == "_oauth2_proxy" {
                      fmt.Printf("###########_oauth2_proxy: %s ", cookie.Value)
@@ -883,18 +880,24 @@ func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
                      fmt.Printf("###########sessionToken: %s ", cookie.Value)
                           }
                 }
-               */
 
                 cookie, err := req.Cookie("sessionToken")
                 fmt.Printf("#####cookie found%s=%s\r\n", cookie.Name, cookie.Value)
                 if err != nil {
                  fmt.Printf("####cant find cookie")
-                    p.SignOut(rw, req);
+                   // p.SignOut(rw, req);
                    return
                 }
+                if cookie = nil{
+                fmt.Printf("####cookie nil#######")
+                 p.SignOut(rw, req);
+                 }
+                else {
                 // fmt.Printf("#####cookie found%s=%s\r\n", cookie.Name, cookie.Value)
+                fmt.Printf("####cookie session token present default pass #######")
 		p.addHeadersForProxying(rw, req, session)
 		p.serveMux.ServeHTTP(rw, req)
+                }
 
 	case ErrNeedsLogin:
 		// we need to send the user to a login screen
