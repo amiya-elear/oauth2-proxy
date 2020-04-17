@@ -888,7 +888,7 @@ func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
                    // p.SignOut(rw, req);
                    return
                 }
-                if cookie = nil{
+                if cookie == nil{
                 fmt.Printf("####cookie nil#######")
                  p.SignOut(rw, req);
                  }
