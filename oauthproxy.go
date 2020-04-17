@@ -873,7 +873,7 @@ func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
 	case nil:
 		// we are authenticated
 
-
+               /*
 
                 for _, cookie := range req.Cookies() {
                   if cookie.Name == "_oauth2_proxy" {
@@ -883,11 +883,13 @@ func (p *OAuthProxy) Proxy(rw http.ResponseWriter, req *http.Request) {
                      fmt.Printf("###########sessionToken: %s ", cookie.Value)
                           }
                 }
+               */
+
                 cookie, err := req.Cookie("sessionToken")
                 fmt.Printf("#####cookie found%s=%s\r\n", cookie.Name, cookie.Value)
                 if err != nil {
-                 fmt.Println("####cant find cookie")
-                   // p.SignOut(rw, req);
+                 fmt.Printf("####cant find cookie")
+                    p.SignOut(rw, req);
                    return
                 }
                 // fmt.Printf("#####cookie found%s=%s\r\n", cookie.Name, cookie.Value)
